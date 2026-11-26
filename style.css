@@ -1,0 +1,720 @@
+/* ==================== Variáveis e base ==================== */
+
+:root {
+    --ink: #1d2321;
+    --teal: #0b5a4e;
+    --mint: #d9e8e3;
+    --line: #c9d3cf;
+    --bg: #f2f5f3;
+    --amber: #b7791f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font: 14px/1.4 "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+}
+
+/* ==================== Cabeçalho ==================== */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: var(--ink);
+    color: #fff;
+}
+
+.l {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.r {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.brand b {
+    font-size: 19px;
+    letter-spacing: 0.4px;
+}
+
+.brand span {
+    margin-left: 12px;
+    opacity: 0.6;
+    font-size: 13px;
+}
+
+#saved {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.tools {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.tools i {
+    width: 1px;
+    height: 22px;
+    background: #fff3;
+}
+
+/* ==================== Botões e campos ==================== */
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: #5b6863;
+}
+
+textarea,
+input[type=text] {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fafcfb;
+}
+
+h3 {
+    margin: 0;
+    font-size: 13px;
+    color: var(--teal);
+}
+
+code {
+    font: 12px Consolas, monospace;
+    background: var(--mint);
+    padding: 1px 5px;
+    border-radius: 4px;
+    word-break: break-all;
+}
+
+audio {
+    width: 100%;
+    height: 32px;
+}
+
+/* ==================== Layout do editor ==================== */
+
+main {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+}
+
+aside {
+    background: #fff;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: auto;
+}
+
+#left {
+    width: 330px;
+    border-right: 1px solid var(--line);
+    flex-shrink: 0;
+}
+
+#right {
+    width: 290px;
+    border-left: 1px solid var(--line);
+}
+
+#insp {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#src {
+    flex: 1;
+    font: 12.5px/1.6 Consolas, monospace;
+    resize: none;
+    white-space: pre;
+    min-height: 200px;
+}
+
+.hint {
+    font-size: 12px;
+    color: #5b6863;
+    margin: 0;
+}
+
+/* ==================== Canvas e ligações ==================== */
+
+#canvas {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(#b9c5c0 1px, transparent 1px) 0 0 / 22px 22px;
+    cursor: grab;
+    touch-action: none;
+}
+
+#canvas:active {
+    cursor: grabbing;
+}
+
+#world {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#edges {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    overflow: visible;
+    pointer-events: none;
+}
+
+#edges path {
+    fill: none;
+}
+
+path.e {
+    stroke: #7b8883;
+    stroke-width: 2;
+}
+
+path.hit {
+    stroke: transparent;
+    stroke-width: 14;
+    pointer-events: stroke;
+    cursor: pointer;
+}
+
+.eg:hover path.e {
+    stroke: #c0392b;
+}
+
+#tmp {
+    stroke: var(--teal);
+    stroke-width: 2;
+    stroke-dasharray: 6 4;
+}
+
+/* ==================== Nós ==================== */
+
+.node {
+    position: absolute;
+    width: 210px;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-left: 5px solid var(--c);
+    border-radius: 10px;
+    padding: 8px 12px;
+    box-shadow: 0 1px 4px #0002;
+    cursor: move;
+    user-select: none;
+}
+
+.node.sel {
+    border-color: var(--c);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 28%, transparent);
+}
+
+.node .hd {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--c);
+    font-size: 13px;
+}
+
+.hd small {
+    font-weight: 400;
+    color: #8a9692;
+    font-size: 11px;
+}
+
+.hd em {
+    font-style: normal;
+    font-weight: 400;
+    opacity: 0.75;
+}
+
+.node p {
+    margin: 4px 0 0;
+    font-size: 12.5px;
+    color: #39443f;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.node.escolha {
+    background: #fff8ea;
+    border-radius: 22px;
+}
+
+.node.end {
+    background: #eef6f3;
+}
+
+.node.end::after {
+    content: "final";
+    position: absolute;
+    right: 10px;
+    bottom: 6px;
+    font-size: 11px;
+    color: #6b7772;
+}
+
+.au {
+    display: flex;
+    padding: 0px;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 11px;
+    color: var(--teal);
+    margin-top: 2px;
+    gap: 2px;
+
+}
+
+.svg-sound-file.audio-name {
+    height: 11px;
+    width: 11px;
+    padding: 0;
+    margin: 0;
+    fill: var(--teal);
+}
+
+.port {
+    position: absolute;
+    top: 50%;
+    width: 13px;
+    height: 13px;
+    margin-top: -7px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--c);
+}
+
+.port.in {
+    left: -10px;
+}
+
+.port.out {
+    right: -8px;
+    cursor: crosshair;
+}
+
+.port.out:hover {
+    background: var(--c);
+}
+
+#legend {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    display: flex;
+    gap: 12px;
+    background: #fffe;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    -webkit-user-select: none !important; /* Safari e navegadores baseados em WebKit */
+    user-select: none !important;
+}
+
+#legend span {
+    -webkit-user-select: none !important; /* Safari e navegadores baseados em WebKit */
+    user-select: none !important;
+}
+
+#legend b {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    margin-right: 5px;
+    -webkit-user-select: none !important; /* Safari e navegadores baseados em WebKit */
+    user-select: none !important;    
+}
+
+/* ==================== Tela inicial ==================== */
+
+#home {
+    flex: 1;
+    overflow: auto;
+    padding: 32px 24px;
+}
+
+.hw {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+#pn {
+    max-width: 360px;
+}
+
+#cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.card:hover {
+    border-color: var(--teal);
+}
+
+.card h4 {
+    margin: 4px 0 0;
+    font-size: 15px;
+}
+
+.card p {
+    margin: 0;
+    font-size: 12px;
+    color: #5b6863;
+}
+
+.th {
+    height: 130px;
+    background: var(--bg);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.th svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.ca {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.ca button {
+    padding: 3px 10px;
+    font-size: 12px;
+}
+
+.newc {
+    align-items: center;
+    justify-content: center;
+    min-height: 210px;
+    border-style: dashed;
+    color: var(--teal);
+    font-size: 15px;
+}
+
+/* Alterna entre a tela inicial e o editor */
+
+.on-home main,
+.on-home .tools,
+.on-home #back,
+.on-home #sname {
+    display: none;
+}
+
+body:not(.on-home) #home {
+    display: none;
+}
+
+/* ==================== Diálogo de exportação ==================== */
+
+dialog {
+    width: min(640px, 92vw);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 12px 40px #0004;
+}
+
+dialog::backdrop {
+    background: #1d232199;
+}
+
+dialog[open] {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dh,
+.df,
+.tabs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.dh {
+    justify-content: space-between;
+}
+
+.df {
+    justify-content: flex-end;
+}
+
+.tabs button.on {
+    background: var(--mint);
+    border-color: var(--teal);
+}
+
+#out {
+    height: 340px;
+    font: 12.5px/1.5 Consolas, monospace;
+    resize: none;
+    white-space: pre;
+}
+
+.swal2-input[type="text"] {
+    margin: 10px auto !important;
+    width: 80% !important;
+}
+
+.button-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 5px;
+}
+
+.button-back-text {
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: 400;
+}
+
+.svg-back {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    padding: 0;
+    fill: #FFFFFF;
+}
+
+.tutorial-link {
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    text-align: center;
+    color: var(--teal);
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.tutorial-link:hover {
+    border-color: var(--teal);
+}
+
+button {
+    font: inherit;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    cursor: pointer;
+}
+
+button:hover {
+    border-color: var(--teal);
+}
+
+button:focus-visible,
+textarea:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 1px;
+}
+
+button.danger {
+    color: #b03a2e;
+    border-color: #e3b9b3;
+}
+
+header button {
+    background: #2c3532;
+    border-color: #44504c;
+    color: #fff;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+    background: #2c3532;
+    border-color: #44504c;
+    color: #fff;
+}
+
+.action-button .action-button-text {
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: 400;    
+}
+
+.action-button .svg-plus {
+    height: 12px;
+    width: 12px;
+    fill: #FFFFFF;
+}
+
+.button-exportar {
+    background-color: var(--teal);
+    border-color: var(--teal);
+}
+
+.rail-label {
+    writing-mode: vertical-rl;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-button {
+    display: flex;
+    padding: 4px;
+    border: none;
+    background: transparent;
+    color: var(--teal);
+}
+
+.icon-button:hover {
+    background: var(--mint);
+}
+
+.icon-button svg,
+.rail-icon {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+#right {
+    flex-shrink: 0;
+}
+
+.panel-resizer {
+    width: 5px;
+    flex-shrink: 0;
+    cursor: col-resize;
+    touch-action: none;
+}
+
+.panel-resizer:hover,
+.panel-resizer:active {
+    background: #0b5a4e55;
+}
+
+.panel-rail {
+    position: relative;
+    display: none;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 36px;
+    padding: 12px 0;
+    border: none;
+    border-radius: 0;
+    background: #fff;
+    color: var(--teal);
+    cursor: pointer;
+}
+
+.panel-rail:hover {
+    background: var(--mint);
+}
+
+#rail-left {
+    border-right: 1px solid var(--line);
+}
+
+#rail-right {
+    border-left: 1px solid var(--line);
+}
+
+.panel-rail.has-selection::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--c, var(--teal));
+}
+
+main.left-collapsed #left,
+main.left-collapsed #resizer-left,
+main.right-collapsed #right,
+main.right-collapsed #resizer-right {
+    display: none;
+}
+
+main.left-collapsed #rail-left,
+main.right-collapsed #rail-right {
+    display: flex;
+}

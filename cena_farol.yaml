@@ -1,0 +1,156 @@
+cena: "O farol abandonado"
+cenario: "Penhasco ao anoitecer, vento forte e o farol aceso sem ninguém"
+nos:
+  - id: "inicio"
+    uuid: 15fa905a-75bb-4533-b00a-20c3f827cfe1
+    tipo: fala
+    interlocutor: "Lia"
+    pose: "assustada"
+    texto: "As luzes do farol acenderam sozinhas. Ninguém sobe aquela escada há trinta anos."
+    condicao: null
+    audio: null
+    proximos: ["inicio_op1","inicio_op2","inicio_op3"]
+  - id: "inicio_op1"
+    uuid: e2d1b063-b283-4787-b904-2ceffef8ad43
+    tipo: escolha
+    interlocutor: null
+    pose: null
+    texto: "Subir a escada"
+    condicao: null
+    audio: null
+    proximos: ["escada"]
+  - id: "inicio_op2"
+    uuid: 6bb7f4bd-176b-4efb-97ea-fc27bf107fd8
+    tipo: escolha
+    interlocutor: null
+    pose: null
+    texto: "Chamar a guarda costeira"
+    condicao: null
+    audio: null
+    proximos: ["radio"]
+  - id: "inicio_op3"
+    uuid: 9d0b74e3-2038-483d-818d-4365f99b093d
+    tipo: escolha
+    interlocutor: null
+    pose: null
+    texto: "Examinar o porão primeiro"
+    condicao: "tem_lanterna"
+    audio: null
+    proximos: ["porao"]
+  - id: "radio"
+    uuid: 90dabb45-e02d-499d-aa01-3eceaee5d9fb
+    tipo: fala
+    interlocutor: "Operador"
+    pose: "neutra"
+    texto: "Guarda costeira. Há um barco a caminho, mas leva uma hora."
+    condicao: null
+    audio: null
+    proximos: ["radio_op1","radio_op2"]
+  - id: "radio_op1"
+    uuid: c0ad89cd-9b07-4571-a173-b33ec09d749b
+    tipo: escolha
+    interlocutor: null
+    pose: null
+    texto: "Esperar o barco"
+    condicao: null
+    audio: null
+    proximos: ["fim_seguro"]
+  - id: "radio_op2"
+    uuid: 10bb9fe1-38ce-46c7-8e4c-c8ceffd7fc7c
+    tipo: escolha
+    interlocutor: null
+    pose: null
+    texto: "Subir mesmo assim"
+    condicao: null
+    audio: null
+    proximos: ["escada"]
+  - id: "porao"
+    uuid: 5ce44620-1935-4e25-ba2c-18417e431947
+    tipo: fala
+    interlocutor: "Lia"
+    pose: "surpresa"
+    texto: "Um diário velho e uma chave presa na parede."
+    condicao: null
+    audio: null
+    proximos: ["sala"]
+  - id: "escada"
+    uuid: 25ef9202-c79f-4f9c-aaae-4bf11ef68b36
+    tipo: fala
+    interlocutor: "Lia"
+    pose: "neutra"
+    texto: "Os degraus rangem. No topo, uma porta entreaberta."
+    condicao: null
+    audio: null
+    proximos: ["sala"]
+  - id: "sala"
+    uuid: 68f182a9-c1e0-4a4a-9594-b4cf964ce062
+    tipo: fala
+    interlocutor: "Ravi"
+    pose: "triste"
+    texto: "Você demorou. A lâmpada precisa de alguém que fique."
+    condicao: null
+    audio: null
+    proximos: ["sala_op1","sala_op2","sala_op3"]
+  - id: "sala_op1"
+    uuid: cd3eab4f-a388-489c-a560-fc7b0aacb07c
+    tipo: escolha
+    interlocutor: null
+    pose: null
+    texto: "Aceitar ficar"
+    condicao: null
+    audio: null
+    proximos: ["fim_guardia"]
+  - id: "sala_op2"
+    uuid: 5ed0f561-ee30-44ef-97a8-74aed69414b4
+    tipo: escolha
+    interlocutor: null
+    pose: null
+    texto: "Mostrar o diário"
+    condicao: "achou_diario"
+    audio: null
+    proximos: ["fim_verdade"]
+  - id: "sala_op3"
+    uuid: 90da2491-5cc7-484a-8261-1d2a18517c50
+    tipo: escolha
+    interlocutor: null
+    pose: null
+    texto: "Fugir pela escada"
+    condicao: null
+    audio: null
+    proximos: ["fim_fuga"]
+  - id: "fim_seguro"
+    uuid: e2619a86-387f-4927-9f44-5dd17547986c
+    tipo: fala
+    interlocutor: "Narrador"
+    pose: null
+    texto: "O barco chega ao amanhecer. O farol se apaga e ninguém comenta o assunto."
+    condicao: null
+    audio: null
+    proximos: []
+  - id: "fim_guardia"
+    uuid: 5f108b9f-c349-485c-bb05-f96a590ce6de
+    tipo: fala
+    interlocutor: "Narrador"
+    pose: null
+    texto: "Lia assume a lâmpada. Ao longe, o mar finalmente se acalma."
+    condicao: null
+    audio: null
+    proximos: []
+  - id: "fim_verdade"
+    uuid: 6813356e-4e1c-46e2-b507-b268bb9af48f
+    tipo: fala
+    interlocutor: "Narrador"
+    pose: null
+    texto: "O diário revela o nome do primeiro guardião. Ravi sorri e desaparece com a névoa."
+    condicao: null
+    audio: null
+    proximos: []
+  - id: "fim_fuga"
+    uuid: 8c1fac19-49c5-4c92-9e20-09b4005ad41d
+    tipo: fala
+    interlocutor: "Narrador"
+    pose: null
+    texto: "Lia corre até a estrada. Atrás dela, o farol apaga de uma vez."
+    condicao: null
+    audio: null
+    proximos: []

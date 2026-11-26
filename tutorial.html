@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tutorial · screenplayer</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tutorial.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="l">
+
+            <a id="back" class="button-back back-cenas" href="index.html">
+                <svg class="svg-back svg-back-cenas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M73.4 297.4C60.9 309.9 60.9 330.2 73.4 342.7L233.4 502.7C245.9 515.2 266.2 515.2 278.7 502.7C291.2 490.2 291.2 469.9 278.7 457.4L173.3 352L544 352C561.7 352 576 337.7 576 320C576 302.3 561.7 288 544 288L173.3 288L278.7 182.6C291.2 170.1 291.2 149.8 278.7 137.3C266.2 124.8 245.9 124.8 233.4 137.3L73.4 297.3z"/></svg>
+                <p class="button-back-text">Voltar às cenas</p>
+            </a>
+
+            <div class="brand">
+                <b>screenplayer</b>
+                <span>Tutorial</span>
+            </div>
+
+        </div>
+
+    </header>
+
+    <div id="tutorial">
+
+        <div class="tw">
+
+            <nav class="toc">
+
+                <h3>Neste tutorial</h3>
+
+                <a href="#visao-geral">1. Visão geral</a>
+                <a href="#tela-inicial">2. Tela inicial e novas cenas</a>
+                <a href="#importar">3. Importar cenas</a>
+                <a href="#editor">4. O editor</a>
+                <a href="#roteiro">5. Linguagem do roteiro</a>
+                <a href="#inspetor">6. Inspetor de nós</a>
+                <a href="#exportar">7. Exportar para a engine</a>
+                <a href="#atalhos">8. Atalhos</a>
+                <a href="#salvamento">9. Salvamento automático</a>
+                <a href="#problemas">10. Problemas comuns</a>
+
+            </nav>
+
+            <article class="doc">
+
+                <section id="visao-geral">
+
+                    <h2>1. Visão geral</h2>
+
+                    <p>
+                        A ferramenta ajuda a escrever e visualizar diálogos ramificados. Você escreve o roteiro em
+                        texto, o editor desenha o grafo, e no final exporta tudo em um formato que a engine do jogo
+                        consiga ler.
+                    </p>
+
+                    <table>
+                        <tr><th>Conceito</th><th>O que é</th></tr>
+                        <tr><td>Projeto</td><td>O conjunto de todas as suas cenas. Tem um nome editável na tela inicial.</td></tr>
+                        <tr><td>Cena</td><td>Um grafo de diálogo completo, com nome e cenário. Ex.: "Encontro na taverna".</td></tr>
+                        <tr><td>Fala</td><td>Uma linha dita por um interlocutor, com pose opcional. É o nó principal.</td></tr>
+                        <tr><td>Escolha</td><td>Uma opção de resposta do jogador, com condição opcional. Liga uma fala a um destino.</td></tr>
+                        <tr><td>Ligação</td><td>A seta de um nó para o próximo. Define o caminho do diálogo.</td></tr>
+                        <tr><td>Final</td><td>Uma fala sem nenhuma ligação de saída. O editor marca com "final".</td></tr>
+                        <tr><td>UUID</td><td>Identificador único de cada nó, gerado automaticamente. Serve de referência para tradução e áudio.</td></tr>
+                    </table>
+
+                </section>
+
+                <section id="tela-inicial">
+
+                    <h2>2. Tela inicial e novas cenas</h2>
+
+                    <p>
+                        Ao abrir o programa você vê o projeto com um card para cada cena. O card mostra uma miniatura do grafo e a
+                        contagem de falas, escolhas e ligações. O campo <strong>Nome do projeto</strong> no topo pode ser editado a qualquer momento.
+                    </p>
+
+                    <h3>Criar uma nova cena</h3>
+
+                    <ol>
+                        <li>Clique no card tracejado <strong>+ Nova cena</strong>.</li>
+                        <li>Digite o nome da cena na caixa que abrir e confirme. O nome não pode ficar vazio.</li>
+                        <li>O editor abre já com uma cena mínima, com uma fala chamada <code>inicio</code>. Troque o texto e continue o roteiro.</li>
+                    </ol>
+
+                    <h3>Outras ações dos cards</h3>
+
+                    <ul>
+                        <li><strong>Abrir:</strong> clique em qualquer lugar do card.</li>
+                        <li><strong>Duplicar:</strong> cria uma cópia chamada "(cópia)". Todos os nós da cópia recebem UUIDs novos, para não repetir referências.</li>
+                        <li><strong>Excluir:</strong> pede confirmação e apaga a cena. A última cena do projeto não pode ser excluída.</li>
+                    </ul>
+
+                </section>
+
+                <section id="importar">
+
+                    <h2>3. Importar cenas</h2>
+
+                    <p>
+                        O card <strong>Importar JSON, XML ou YAML</strong> carrega um arquivo exportado pelo próprio editor
+                        (ou escrito à mão no mesmo formato) como uma <strong>cena nova</strong>. Nada do que já existe é sobrescrito.
+                    </p>
+
+                    <h3>Passo a passo</h3>
+
+                    <ol>
+                        <li>Clique em <strong>Importar JSON, XML ou YAML</strong> e escolha o arquivo.</li>
+                        <li>O formato é detectado pela extensão (<code>.json</code>, <code>.xml</code>, <code>.yaml</code>, <code>.yml</code>). Sem extensão conhecida, o programa olha o primeiro caractere do conteúdo.</li>
+                        <li>Se tudo estiver certo, aparece um aviso verde no canto e o card da nova cena entra na lista.</li>
+                        <li>Se algo estiver errado, uma caixa explica o motivo e nada é importado.</li>
+                    </ol>
+
+                    <h3>Regras da importação</h3>
+
+                    <table>
+                        <tr><th>Situação</th><th>O que acontece</th></tr>
+                        <tr><td>UUID já usado em outra cena</td><td>O nó importado recebe um UUID novo. UUIDs continuam únicos no projeto.</td></tr>
+                        <tr><td>Ligação para um id que não existe</td><td>A ligação é descartada em silêncio.</td></tr>
+                        <tr><td>Dois nós com o mesmo id</td><td>Erro. A importação é cancelada.</td></tr>
+                        <tr><td>Arquivo sem a lista de nós</td><td>Erro. O formato esperado é o da seção 7.</td></tr>
+                        <tr><td>Posições dos nós</td><td>Não existem nos arquivos. O grafo é organizado automaticamente.</td></tr>
+                        <tr><td>XML</td><td>O elemento raiz precisa ser <code>&lt;cena&gt;</code>.</td></tr>
+                        <tr><td>YAML</td><td>Aceita o formato exportado e variações simples: textos com ou sem aspas, <code>proximos</code> em linha ou em lista com hífens. Âncoras e textos em várias linhas não são suportados.</td></tr>
+                    </table>
+
+                    <div class="note">
+                        Na pasta <code>exemplos/</code> há cenas prontas nos três formatos (<code>cena_farol</code> e <code>cena_feira</code>)
+                        e um <code>invalido.json</code> para ver a mensagem de erro.
+                    </div>
+
+                </section>
+
+                <section id="editor">
+
+                    <h2>4. O editor</h2>
+
+                    <p>A tela do editor tem três áreas.</p>
+
+                    <ul>
+                        <li><strong>Esquerda, Roteiro:</strong> o texto da cena. Veja a sintaxe na seção 5.</li>
+                        <li><strong>Centro, Canvas:</strong> o grafo. Cada interlocutor tem uma cor, explicada na legenda no canto inferior esquerdo. Escolhas são sempre âmbar.</li>
+                        <li><strong>Direita, Inspetor:</strong> sem nenhum nó selecionado mostra as configurações da cena (nome, cenário e totais). Com um nó selecionado mostra as propriedades dele.</li>
+                    </ul>
+
+                    <h3>Barra superior</h3>
+
+                    <table>
+                        <tr><th>Botão</th><th>Função</th></tr>
+                        <tr><td>← Cenas</td><td>Salva e volta para a tela inicial.</td></tr>
+                        <tr><td>+ Fala / + Escolha</td><td>Cria um nó novo no centro da área visível e já o seleciona.</td></tr>
+                        <tr><td>Organizar</td><td>Reposiciona todos os nós em colunas, por profundidade no grafo. Útil quando os nós se sobrepõem.</td></tr>
+                        <tr><td>Exportar</td><td>Abre a exportação da cena atual (seção 7).</td></tr>
+                    </table>
+
+                    <h3>Trabalhando no canvas</h3>
+
+                    <ul>
+                        <li><strong>Mover a tela:</strong> arraste uma área vazia do fundo.</li>
+                        <li><strong>Mover um nó:</strong> arraste o nó. A posição é salva ao soltar.</li>
+                        <li><strong>Ligar nós:</strong> arraste a partir do círculo na borda <em>direita</em> de um nó e solte sobre outro nó. Ligações repetidas e ligação de um nó com ele mesmo são ignoradas.</li>
+                        <li><strong>Remover uma ligação:</strong> clique na seta. Ela fica vermelha quando o mouse passa por cima.</li>
+                        <li><strong>Excluir um nó:</strong> selecione e use o botão do inspetor ou a tecla <kbd>Delete</kbd>. As ligações dele somem juntas.</li>
+                    </ul>
+
+                    <div class="note">
+                        Fluxo recomendado: escreva a estrutura no roteiro, clique em Compilar, e use o canvas para ajustar,
+                        ligar e refinar textos. O roteiro é atualizado sozinho a cada alteração no grafo.
+                    </div>
+
+                </section>
+
+                <section id="roteiro">
+
+                    <h2>5. Linguagem do roteiro</h2>
+
+                    <p>O painel da esquerda usa uma linguagem simples, uma instrução por linha. Clique em <strong>Compilar para o grafo</strong> (ou <kbd>Ctrl</kbd>+<kbd>Enter</kbd>) para aplicar.</p>
+
+                    <table>
+                        <tr><th>Linha</th><th>Significado</th></tr>
+                        <tr><td><code># Cena: Nome</code></td><td>Define o nome da cena. Sem esta linha o nome fica "Sem título".</td></tr>
+                        <tr><td><code># Cenário: Texto</code></td><td>Descrição de onde e quando a cena acontece.</td></tr>
+                        <tr><td><code># qualquer outra coisa</code></td><td>Comentário. É ignorado.</td></tr>
+                        <tr><td><code>[id] Quem (pose): texto</code></td><td>Cria uma fala. O <code>id</code> é o nome do nó. Interlocutor e pose são opcionais.</td></tr>
+                        <tr><td><code>* texto -&gt; destino</code></td><td>Cria uma escolha ligada à fala acima, que leva ao <code>destino</code>.</td></tr>
+                        <tr><td><code>* [condição] texto -&gt; destino</code></td><td>Igual à anterior, com uma condição para a opção aparecer.</td></tr>
+                        <tr><td><code>-&gt; destino</code></td><td>Liga a fala acima direto a outra fala, sem escolha.</td></tr>
+                    </table>
+
+                    <h3>Exemplo completo</h3>
+
+<pre># Cena: Encontro na taverna
+# Cenário: Taverna do Corvo, noite de chuva
+[inicio] Mara (neutra): Então você é a viajante de quem todos falam?
+  * Aceitar a missão -&gt; aceitar
+  * Recusar com educação -&gt; recusar
+  * [moedas &gt;= 50] Comprar informações -&gt; aceitar
+[aceitar] Mara (feliz): Ótimo. Partimos ao amanhecer.
+  -&gt; fim
+[recusar] Mara (triste): Pena. A porta fica aberta.
+  -&gt; fim
+[fim] Narrador: A noite cai sobre a taverna.</pre>
+
+                    <h3>Regras importantes</h3>
+
+                    <ul>
+                        <li>As linhas <code>*</code> e <code>-&gt;</code> pertencem à última fala escrita acima delas. Antes da primeira fala, são ignoradas.</li>
+                        <li>As escolhas ganham ids automáticos: <code>inicio_op1</code>, <code>inicio_op2</code> e assim por diante, na ordem em que aparecem.</li>
+                        <li>Destinos que não existem e ligações repetidas são descartados.</li>
+                        <li>O interlocutor é o texto antes dos dois-pontos, com até 30 caracteres. Se a fala não tiver interlocutor, escreva só o texto.</li>
+                        <li>Uma fala sem nenhuma ligação de saída vira um <strong>final</strong>.</li>
+                    </ul>
+
+                    <div class="warn">
+                        <strong>Compilar preserva UUID, áudio e posição</strong> dos nós cujo id não mudou.
+                        Se você renomear um id, o editor entende como um nó novo e gera outro UUID. O mesmo vale para
+                        escolhas, porque o id delas depende da ordem. Reordenar opções troca os UUIDs.
+                    </div>
+
+                    <div class="warn">
+                        Alterações no grafo reescrevem o painel do roteiro. Se você digitou texto lá e ainda não compilou,
+                        compile antes de mexer no canvas, ou esse texto será substituído.
+                    </div>
+
+                </section>
+
+                <section id="inspetor">
+
+                    <h2>6. Inspetor de nós</h2>
+
+                    <h3>Fala</h3>
+
+                    <table>
+                        <tr><th>Campo</th><th>Uso</th></tr>
+                        <tr><td>Interlocutor</td><td>Quem fala. Define a cor do nó. A lista sugere nomes que já existem na cena.</td></tr>
+                        <tr><td>Pose</td><td>Expressão ou animação do personagem. Texto livre, com sugestões: neutra, feliz, triste, brava, surpresa.</td></tr>
+                        <tr><td>Texto</td><td>A fala em si.</td></tr>
+                        <tr><td>UUID</td><td>Somente leitura. Use como chave de tradução ou referência.</td></tr>
+                        <tr><td>Áudio</td><td>Escolha um arquivo de áudio para ouvir no player e registrar o nome dele no nó. Só o nome do arquivo é salvo, não o áudio em si.</td></tr>
+                    </table>
+
+                    <h3>Escolha</h3>
+
+                    <ul>
+                        <li><strong>Texto:</strong> o que o jogador lê como opção.</li>
+                        <li><strong>Condição para aparecer:</strong> texto livre, por exemplo <code>moedas &gt;= 50</code>. O editor não avalia a condição. Ela é exportada para a engine interpretar.</li>
+                    </ul>
+
+                    <h3>Configurações da cena</h3>
+
+                    <p>Com nenhum nó selecionado (clique no fundo do canvas), o inspetor mostra o nome da cena, o cenário e os totais de nós, ligações e finais.</p>
+
+                </section>
+
+                <section id="exportar">
+
+                    <h2>7. Exportar para a engine</h2>
+
+                    <p>
+                        O botão <strong>Exportar</strong> exporta a <strong>cena que está aberta</strong>. Escolha o formato na aba
+                        (JSON, XML ou YAML), copie o texto ou baixe como <code>dialogos.json</code>, <code>dialogos.xml</code> ou <code>dialogos.yaml</code>.
+                    </p>
+
+                    <table>
+                        <tr><th>Campo</th><th>Conteúdo</th></tr>
+                        <tr><td><code>cena</code>, <code>cenario</code></td><td>Nome e descrição da cena.</td></tr>
+                        <tr><td><code>id</code></td><td>Nome do nó, igual ao do roteiro.</td></tr>
+                        <tr><td><code>uuid</code></td><td>Identificador único do nó.</td></tr>
+                        <tr><td><code>tipo</code></td><td><code>fala</code> ou <code>escolha</code>.</td></tr>
+                        <tr><td><code>interlocutor</code>, <code>pose</code></td><td>Só nas falas. <code>null</code> quando vazios.</td></tr>
+                        <tr><td><code>texto</code></td><td>Fala ou texto da opção.</td></tr>
+                        <tr><td><code>condicao</code></td><td>Só nas escolhas. <code>null</code> quando vazia.</td></tr>
+                        <tr><td><code>audio</code></td><td>Nome do arquivo de áudio, ou <code>null</code>.</td></tr>
+                        <tr><td><code>proximos</code></td><td>Lista de ids de destino. Uma fala aponta para suas escolhas ou para a próxima fala. Uma escolha aponta para o destino. Lista vazia indica um final.</td></tr>
+                    </table>
+
+                    <h3>Exemplo de saída (JSON)</h3>
+
+<pre>{
+  "cena": "Encontro na taverna",
+  "cenario": "Taverna do Corvo, noite de chuva",
+  "nos": [
+    {
+      "id": "inicio",
+      "uuid": "3f0c9b1e-…",
+      "tipo": "fala",
+      "interlocutor": "Mara",
+      "pose": "neutra",
+      "texto": "Então você é a viajante de quem todos falam?",
+      "condicao": null,
+      "audio": null,
+      "proximos": ["inicio_op1", "inicio_op2"]
+    }
+  ]
+}</pre>
+
+                    <div class="note">
+                        O arquivo exportado pode ser importado de volta (seção 3). Serve também como backup de uma cena.
+                    </div>
+
+                </section>
+
+                <section id="atalhos">
+
+                    <h2>8. Atalhos</h2>
+
+                    <table>
+                        <tr><th>Atalho</th><th>Ação</th></tr>
+                        <tr><td><kbd>Ctrl</kbd> + <kbd>Enter</kbd> no roteiro</td><td>Compila o roteiro.</td></tr>
+                        <tr><td><kbd>Delete</kbd></td><td>Exclui o nó selecionado (quando nenhum campo está em edição).</td></tr>
+                        <tr><td><kbd>Esc</kbd></td><td>Fecha a janela de exportação.</td></tr>
+                    </table>
+
+                </section>
+
+                <section id="salvamento">
+
+                    <h2>9. Salvamento automático</h2>
+
+                    <ul>
+                        <li>Tudo é salvo no <strong>armazenamento local do navegador</strong> a cada alteração. O topo da tela mostra "Salvo neste navegador".</li>
+                        <li>Os dados pertencem ao <strong>endereço</strong> em que a página abriu. <code>localhost</code> e <code>127.0.0.1</code> são endereços diferentes, e a porta também conta. Se o projeto parecer ter sumido, confira o endereço.</li>
+                        <li>Limpar os dados do site no navegador apaga o projeto. Exporte as cenas importantes como backup.</li>
+                        <li>Arquivos de áudio não são guardados. Depois de recarregar, o nome continua no nó, mas o player some.</li>
+                    </ul>
+
+                </section>
+
+                <section id="problemas">
+
+                    <h2>10. Problemas comuns</h2>
+
+                    <table>
+                        <tr><th>Sintoma</th><th>Causa e solução</th></tr>
+                        <tr><td>Nós empilhados ou sobrepostos</td><td>Clique em <strong>Organizar</strong>.</td></tr>
+                        <tr><td>Uma seta que deveria existir não aparece</td><td>O destino no roteiro está com o id errado. Confira a grafia, maiúsculas incluídas.</td></tr>
+                        <tr><td>A cena aparece como "Sem título"</td><td>Falta a linha <code># Cena: Nome</code> no início do roteiro.</td></tr>
+                        <tr><td>Uma escolha sumiu depois de compilar</td><td>Ela não tinha destino. Escolhas só existem no roteiro quando levam a algum lugar.</td></tr>
+                        <tr><td>Importação recusada</td><td>Leia a mensagem. Os motivos mais comuns são JSON inválido, XML sem <code>&lt;cena&gt;</code> e ids repetidos.</td></tr>
+                        <tr><td>Caixas de diálogo com aparência simples</td><td>O arquivo do SweetAlert2 não foi encontrado em <code>sweetalert2/</code>. O programa funciona com as caixas nativas do navegador.</td></tr>
+                        <tr><td>O projeto voltou ao exemplo inicial</td><td>Os dados do navegador foram limpos ou o endereço mudou. Veja a seção 9.</td></tr>
+                    </table>
+
+                </section>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

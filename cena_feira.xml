@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cena nome="Apresentação na feira">
+  <cenario>Estande do IFCiência, 9h, muita gente passando</cenario>
+  <no id="inicio" uuid="a7744a3a-f966-481c-a032-ef566823d0dd" tipo="fala">
+    <interlocutor>Professora</interlocutor>
+    <pose>neutra</pose>
+    <texto>Vocês têm cinco minutos. Mostrem o protótipo.</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="inicio_op1"/>
+    <proximo ref="inicio_op2"/>
+  </no>
+  <no id="inicio_op1" uuid="853f70e2-48a6-4231-bfdf-a5bb627ef596" tipo="escolha">
+    <interlocutor></interlocutor>
+    <pose></pose>
+    <texto>Começar pelo problema</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="problema"/>
+  </no>
+  <no id="inicio_op2" uuid="832e1474-a6ea-4878-8abb-32e24362f001" tipo="escolha">
+    <interlocutor></interlocutor>
+    <pose></pose>
+    <texto>Abrir direto a demonstração</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="demo"/>
+  </no>
+  <no id="problema" uuid="81dd3463-776a-472e-8c58-2c1e073ae78e" tipo="fala">
+    <interlocutor>Aluno</interlocutor>
+    <pose>feliz</pose>
+    <texto>Roteiristas usam planilhas e se perdem nas ramificações.</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="demo"/>
+  </no>
+  <no id="demo" uuid="a7fde1a8-00a1-4013-b50c-de2652dc2395" tipo="fala">
+    <interlocutor>Aluno</interlocutor>
+    <pose>feliz</pose>
+    <texto>Aqui o roteiro vira grafo. Cada nó tem um UUID e pode ser exportado para a engine.</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="demo_op1"/>
+    <proximo ref="demo_op2"/>
+    <proximo ref="demo_op3"/>
+  </no>
+  <no id="demo_op1" uuid="a9a8a19d-6ce8-4420-9c2d-a1cca6a5fa63" tipo="escolha">
+    <interlocutor></interlocutor>
+    <pose></pose>
+    <texto>Mostrar a exportação</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="export"/>
+  </no>
+  <no id="demo_op2" uuid="254db669-7f73-4fd8-b662-f85aa35b80fb" tipo="escolha">
+    <interlocutor></interlocutor>
+    <pose></pose>
+    <texto>Abrir o site da engine</texto>
+    <condicao>tem_wifi</condicao>
+    <audio></audio>
+    <proximo ref="engine"/>
+  </no>
+  <no id="demo_op3" uuid="c4a4fecb-b313-4995-8e0b-0373e851a15b" tipo="escolha">
+    <interlocutor></interlocutor>
+    <pose></pose>
+    <texto>Passar para as perguntas</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="perguntas"/>
+  </no>
+  <no id="export" uuid="1bddf8d5-2d82-474f-a6d9-087c029fbb2a" tipo="fala">
+    <interlocutor>Aluno</interlocutor>
+    <pose>feliz</pose>
+    <texto>O mesmo diálogo sai em JSON, XML ou YAML.</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="perguntas"/>
+  </no>
+  <no id="engine" uuid="983350e7-0a42-4ae5-8656-e62973ec02d4" tipo="fala">
+    <interlocutor>Aluno</interlocutor>
+    <pose>surpresa</pose>
+    <texto>Sem internet agora, mas o arquivo exportado funciona offline.</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="perguntas"/>
+  </no>
+  <no id="perguntas" uuid="7e514407-0e0e-41c6-9ffe-23e6e3a0556b" tipo="fala">
+    <interlocutor>Professora</interlocutor>
+    <pose>feliz</pose>
+    <texto>Boa apresentação. Última pergunta: e os testes com usuários?</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="perguntas_op1"/>
+    <proximo ref="perguntas_op2"/>
+  </no>
+  <no id="perguntas_op1" uuid="04fc72a7-a572-4649-a260-5798c474e082" tipo="escolha">
+    <interlocutor></interlocutor>
+    <pose></pose>
+    <texto>Falar da avaliação planejada</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="fim"/>
+  </no>
+  <no id="perguntas_op2" uuid="ef1eb60a-ab08-4b8d-a247-d647ee18b23d" tipo="escolha">
+    <interlocutor></interlocutor>
+    <pose></pose>
+    <texto>Admitir que é a próxima etapa</texto>
+    <condicao></condicao>
+    <audio></audio>
+    <proximo ref="fim"/>
+  </no>
+  <no id="fim" uuid="5191c678-4228-409a-930d-b9c3abb0f234" tipo="fala">
+    <interlocutor>Narrador</interlocutor>
+    <pose></pose>
+    <texto>O sinal toca e a próxima equipe se aproxima.</texto>
+    <condicao></condicao>
+    <audio></audio>
+  </no>
+</cena>

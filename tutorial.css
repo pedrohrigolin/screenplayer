@@ -1,0 +1,188 @@
+/* ==================== Página de tutorial ==================== */
+
+#tutorial {
+    flex: 1;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+
+.tw {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* ==================== Índice lateral ==================== */
+
+.toc {
+    position: sticky;
+    top: 32px;
+    width: 230px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.toc h3 {
+    margin-bottom: 8px;
+}
+
+.toc a {
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.toc a:hover {
+    background: var(--mint);
+}
+
+/* ==================== Conteúdo ==================== */
+
+.doc {
+    flex: 1;
+    min-width: 0;
+    line-height: 1.6;
+}
+
+.doc section {
+    margin-bottom: 48px;
+}
+
+.doc h2 {
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    font-size: 24px;
+    border-bottom: 2px solid var(--mint);
+}
+
+.doc h3 {
+    margin: 24px 0 8px;
+    font-size: 15px;
+}
+
+.doc p,
+.doc li {
+    font-size: 14.5px;
+}
+
+.doc ul,
+.doc ol {
+    padding-left: 22px;
+}
+
+.doc li {
+    margin-bottom: 4px;
+}
+
+.doc table {
+    width: 100%;
+    margin: 12px 0;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 13.5px;
+}
+
+.doc th,
+.doc td {
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+}
+
+.doc th {
+    background: var(--mint);
+}
+
+.doc td:first-child {
+    white-space: nowrap;
+}
+
+.doc pre {
+    margin: 12px 0;
+    padding: 14px 16px;
+    overflow-x: auto;
+    border-radius: 10px;
+    background: var(--ink);
+    color: #e6efeb;
+    font: 12.5px/1.6 Consolas, monospace;
+}
+
+kbd {
+    padding: 1px 6px;
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    background: #fff;
+    font: 12px Consolas, monospace;
+}
+
+.note,
+.warn {
+    margin: 14px 0;
+    padding: 10px 14px;
+    border-left: 4px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    background: var(--mint);
+    font-size: 14px;
+}
+
+.warn {
+    border-left-color: var(--amber);
+    background: #fff4de;
+}
+
+.button-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 5px;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #44504c;
+    border-radius: 8px;
+    background: #2c3532;
+}
+
+.button-back:hover {
+    border-color: #fff;
+}
+
+.button-back-text {
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: 400;
+}
+
+.svg-back {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    padding: 0;
+    fill: #FFFFFF;
+}
+
+/* ==================== Telas estreitas ==================== */
+
+@media (max-width: 860px) {
+
+    .toc {
+        display: none;
+    }
+
+    .doc td:first-child {
+        white-space: normal;
+    }
+
+}
